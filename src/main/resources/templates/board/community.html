@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		th:replace="~{fragments/layout-form::layout(~{::title}, ~{::section})}">
+
+<title>커뮤니티</title>
+
+<section>
+	<!-- 전체 -->
+	<div class="container px-5 py-4">
+
+		<!-- 제목 -->
+		<div class="m-auto my-5">
+			<h1 class="m-auto" style="text-align : center;">커뮤니티</h1>
+		</div>
+
+		<!-- 검색 라인 -->
+		<form action="/posts/search" method="get" class="mb-5 text-center" style="text-align : center;">
+			<div class="row justify-content-md-center">
+				<div class="col-2">
+					<select class="form-select" name="select">
+						<option value="title">제목</option>
+						<option value="nick">작성자</option>
+					</select>
+				</div>
+				<div class="col-7">
+					<label for="search" class="visually-hidden">search</label>
+          <input type="text" name="text" class="form-control rounded-pill" id="search" placeholder="search">
+				</div>
+				<div class="col-auto">
+					<button type="submit" class="btn btn-primary rounded-pill">Better</button>
+				</div>
+			</div>
+		</form>
+		<!-- 글쓰기 및 필터 기능 -->
+		<div class="row mb-3">
+			<!-- 작성하기 -->
+			<div class="col">
+				<a class="btn btn-primary btn-lg px-2 me-sm-2" href="#">
+					<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+					</svg> 작성하기
+				</a>
+			</div>
+
+			<!-- 필터 -->
+			<div class="btn-group col-auto">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+					</svg> <span th:text="${sortValue}?: _">최신순</span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="/posts?sort=boardNo">최신순</a></li>
+					<li><a class="dropdown-item" href="/posts?sort=boardCnt">조회순</a></li>
+					<li><a class="dropdown-item" href="/posts?sort=boardLike">추천순</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 게시판 -->
+		<table class="table table-dark table-hover">
+			<colgroup>
+				<col style="width: 15%;">
+				<col style="width: 40%;">
+				<col style="width: 12%;">
+				<col style="width: 12%;">
+				<col style="width: 12%;">
+			</colgroup>
+			<caption style="font-size: 0px;">커뮤니티</caption>
+			<thead>
+				<tr>
+					<th scope="col">작성일</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">조회수</th>
+					<th scope="col">좋아요</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				<tr th:each="board: ${boardList}">
+					<th th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm')}" scope="row">2023-01-04</th>
+					<td><a class="link-light" th:href="@{|/posts/${board.boardNo}|}" th:text="${board.boardTitle}">환상의 커플 정주행 가즈아~~~!</a></td>
+					<td th:text="${board.boardWriter}">나상실</td>
+					<td th:text="${board.boardCnt}">31</td>
+					<td th:text="${board.boardLike}">7</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>

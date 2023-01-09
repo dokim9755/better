@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:fragment="layout(title, contents)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- title 영역 : 변수 -->
+    <title th:replace="${title}">Better</title>
+    <link th:href="@{/img/favicon.png}" rel="icon" type="image/x-icon">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <script th:src="@{/js/bootstrap.bundle.min.js}" defer></script>
+</head>
+<body class="d-flex flex-column h-100 bg-dark">
+	<main class="flex-shrink-0">
+		<!-- header 영역 -->
+		<div th:replace="fragments/navigation::navigation">header 영역</div>
+	</main>
+	<!-- contents 영역 : 변수 -->
+	<div th:replace="${contents}">contents 영역</div>
+
+	<!-- footer 영역 -->
+	<div th:replace="fragments/footer::footer">footer 영역</div>
+</body>
+</html>

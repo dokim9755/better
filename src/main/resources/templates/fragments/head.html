@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- title 영역 : 변수 -->
+    <title th:replace="${title}">Better</title>
+    <link th:href="@{/img/favicon.png}" rel="icon" type="image/x-icon">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <script th:src="@{/js/bootstrap.bundle.min.js}" defer></script>
+    <style>
+    .or-line {
+      display: block;
+      margin: 10px 0;
+      position: relative;
+      text-align: center;
+      color: rgba(243, 244, 246);
+    }
+
+    .or-line:before {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: 0;
+      background-color: rgba(243, 244, 246);
+      width: 46%;
+      height: 1px;
+    }
+
+    .or-line::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      right: 0;
+      background-color: rgba(243, 244, 246);
+      width: 46%;
+      height: 1px;
+    }
+    .gray-color {
+      color: rgba(55, 65, 81);
+    }
+    .main-color {
+      color: rgba(0, 147, 243);
+    }
+    .gray-set {
+    	background-color: rgba(55, 65, 81);
+    	color: rgba(243, 244, 246);
+    }
+    .gray-left-right {
+      border: 5px solid rgba(55, 65, 81);
+      border-right: 1px solid rgba(55, 65, 81);
+    }
+
+    .gray-top-bottom {
+      border-left: 1px solid rgba(55, 65, 81);
+      border-right: 1px solid rgba(55, 65, 81);
+    }
+  </style>
+</head>

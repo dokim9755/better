@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Navigation-->
+<nav th:fragment="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="/"><img
+			src="/img/logo.png" alt="로고" style="width: 220px; height: 50px;"></a>
+		<button class="navbar-toggler" type="button"
+			data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link fw-bold fs-4" href="#">무인민원발급안내</a></li>
+				<li class="nav-item"><a class="nav-link fw-bold fs-4" href="/posts">커뮤니티</a></li>
+			</ul>
+			<ul class="ms-auto mb-2 mb-lg-0">
+				<a class="btn btn-outline-secondary mx-2 fw-bold rounded-pill" href="/login">로그인</a>
+				<a class="btn btn-primary mx-2 fw-bold rounded-pill" href="/signup">회원가입</a>
+			</ul>
+		</div>
+	</div>
+</nav>

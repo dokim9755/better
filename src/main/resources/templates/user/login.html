@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head::head(~{::title})}">
+	<title>로그인 페이지</title>
+</head>
+ 
+<body class="h-100 bg-dark">
+  <div class="b-example-divider"></div>
+
+  <div class="position-absolute top-50 start-50 translate-middle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 bg-dark">
+        <div class="p-5 mt-5 position-relative">
+          <a href="/"><img src="/img/logo.png" class="w-75 position-absolute top-50 start-50 translate-middle" alt="로고"></a>
+        </div>
+        <div class="p-5">
+          <div><p class="fs-5 fw-bold">ID 로그인</p></div>
+          <form class="">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+              <label for="floatingInput">아이디</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+              <label for="floatingPassword">비밀번호</label>
+            </div>
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">로그인</button>
+            <small class="text-muted"> </small>
+            <span class="or-line my-4">OR</span>
+            <h2 class="fs-5 fw-bold mb-3">간편 로그인</h2>
+            <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">구글 로그인</button>
+            <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">카카오 로그인</button>
+            <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">네이버 로그인</button>
+          </form>
+          <p class="mt-4" style="text-align: center">
+            	Better에 처음 방문하셨나요? <a class="link-light fw-bold main-color" href="/signup">회원가입</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-example-divider"></div>
+</body>
+
+</html>
