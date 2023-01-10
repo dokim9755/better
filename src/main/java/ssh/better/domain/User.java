@@ -47,9 +47,6 @@ public class User {
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	//@OneToMany(mappedBy = "uidNo") 프록시 에러
-	//private List<Board> boardList;
-	
 	@Builder
 	public User(String userId, String userPwd, String userNick, String userEmail) {
 		this.userId = userId;

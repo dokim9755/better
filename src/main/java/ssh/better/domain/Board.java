@@ -31,8 +31,7 @@ public class Board {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long boardNo;
 	
-	//@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-	//@JoinColumn(name = "uidNo") 프록시 에러
+	@Column(nullable = false)
 	private Integer uidNo;
 	
 	@Column(nullable = false)

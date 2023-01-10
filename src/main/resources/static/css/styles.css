@@ -6444,7 +6444,7 @@ textarea.form-control-lg {
 .link-light {
   color: #f8f9fa;
   text-decoration: none;
-
+  border: 0px;
 }
 .link-light:hover, .link-light:focus {
   color: #f9fafb;
