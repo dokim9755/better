@@ -16,13 +16,13 @@
         </div>
         <div class="p-5">
           <div><p class="fs-5 fw-bold">ID 로그인</p></div>
-          <form class="">
+          <form action="/login" method="post">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+              <input type="text" name="userId" class="form-control rounded-3" id="floatingInput" placeholder="아이디를 입력해주세요.">
               <label for="floatingInput">아이디</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+              <input type="password" name="userPwd" class="form-control rounded-3" id="floatingPassword" placeholder="비밀번호를 입력해주세요.">
               <label for="floatingPassword">비밀번호</label>
             </div>
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">로그인</button>

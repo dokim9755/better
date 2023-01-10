@@ -78,6 +78,7 @@ public class BoardRepository {
 		String sql = "update board b set b.boardTitle = :title, "
 				+ "b.boardContent = :content "
 				+ "where b.boardNo = :boardNo";
+		
 		int rows = em.createQuery(sql).setParameter("title", boardUp.getBoardTitle())
 							.setParameter("content", boardUp.getBoardContent())
 							.setParameter("boardNo", boardNo)
