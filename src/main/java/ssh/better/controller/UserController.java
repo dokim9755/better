@@ -1,7 +1,5 @@
 package ssh.better.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,17 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ssh.better.domain.User;
-import ssh.better.repository.UserRepository;
+import ssh.better.service.UserService;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
 	
-	private final UserRepository userRepository;
-	
-	@Autowired
-	private BCryptPasswordEncoder encoder;
+	private final UserService userService;
 	
 	@GetMapping("/login")
 	public String loginForm() {
@@ -41,15 +36,9 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	public String signup(@ModelAttribute User user) {
-		log.info("유저 정보 {}", user);
+		userService.save(user);
 		
-		String encoderPwd = encoder.encode(user.getUserPwd());
-		user.setUserPwd(encoderPwd);
-		
-		userRepository.save(user);
-		log.info("저장 확인 {}", userRepository.findByUidNo(user.getUidNo()));
-		
+		log.info("회원가입 최종 확인 >> {}", user);
 		return "redirect:/login";
 	}
-
 }
