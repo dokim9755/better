@@ -33,6 +33,27 @@ public class BoardRepository {
 		return Optional.ofNullable(board);
 	}
 	
+	// << 조회수 기준 상위 10개 >>
+	public List<Board> findTop() {
+		String sql = "select b from board b order by b.boardCnt desc";
+		
+		return em.createQuery(sql, Board.class).setMaxResults(10).getResultList();
+	}
+	
+	// 검색_제목 조회
+	public List<Board> findByBoardTitle(String boardTitle) {
+		return em.createQuery("select b from board b where b.boardTitle like :title", Board.class)
+				.setParameter("title", "%" + boardTitle + "%")
+				.getResultList();
+	}
+	
+	// 검색_작성자
+	public List<Board> findByBoardWriter(String boardWriter) {
+		return em.createQuery("select b from board b where boardWriter like :writer", Board.class)
+				.setParameter("writer", "%" + boardWriter + "%")
+				.getResultList();
+	}
+	
 	// 전체 조회 : << 최신순 >>
 	public List<Board> findAll() {
 		return em.createQuery("select b from board b order by boardNo desc", Board.class).getResultList();
@@ -46,30 +67,6 @@ public class BoardRepository {
 	// 정렬 : << 추천순 >>
 	public List<Board> findByBoardLikeOrder() {
 		return em.createQuery("select b from board b order by b.boardLike desc", Board.class).getResultList();
-	}
-	
-	// 조회수 기준 상위 10개 조회
-	public List<Board> findTop() {
-		String sql = "select b from board b order by b.boardCnt desc";
-		
-		return em.createQuery(sql, Board.class).setMaxResults(10).getResultList();
-	}
-	
-	// 검색_제목 조회
-	public List<Board> findByBoardTitle(String boardTitle) {
-		List<Board> titleList = em.createQuery("select b from board b where b.boardTitle like :title", Board.class)
-								.setParameter("title", "%" + boardTitle + "%")
-								.getResultList();
-		
-		return titleList;
-	}
-	
-	// 검색_작성자
-	public List<Board> findByBoardWriter(String boardWriter) {
-		List<Board> writerList = em.createQuery("select b from board b where boardWriter like :writer", Board.class)
-									.setParameter("writer", "%" + boardWriter + "%")
-									.getResultList();
-		return writerList;
 	}
 	
 	// 게시글 제목 및 내용 수정
@@ -98,5 +95,4 @@ public class BoardRepository {
 		em.createQuery(sql).setParameter("pk", boardPk).executeUpdate();
 		em.clear();
 	}
-	
 }

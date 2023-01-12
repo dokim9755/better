@@ -47,6 +47,7 @@ public class BoardController {
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("sortValue", sortValue);
+		
 		return "board/community";
 	}
 	

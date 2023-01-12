@@ -25,10 +25,11 @@ class BoardRepositoryTest {
 	@Test
 	void save() {
 		// given
-		System.out.println("why? " + userRepository.findByUidNo(3).get());
 		User user = userRepository.findByUidNo(3).get();
+		log.info("유저 정보 확인 >> {}", user);
+		
 		Board board = Board.builder().uidNo(user.getUidNo())
-					.boardWriter("작성자3")
+					.boardWriter(user.getUserNick())
 					.boardTitle("제목5")
 					.boardContent("내용5")
 					.build();
@@ -37,10 +38,9 @@ class BoardRepositoryTest {
 		Board saved = repository.save(board);
 		
 		// then
-		Board board2 = repository.findByBoardNo(board.getBoardNo()).get();
-		log.info("값을 갖고 있는지 null인지 확인 >> {}", board2);
+		log.info("정상적으로 등록 되어 있는지 확인 >> {}", saved);
+		assertThat(saved.getBoardWriter()).isEqualTo(user.getUserNick());
 		assertThat(saved.getBoardTitle()).isEqualTo("제목5");
-		assertThat(saved.getBoardWriter()).isEqualTo("작성자3");
 		assertThat(saved.getBoardContent()).isEqualTo("내용5");
 	}
 	
@@ -49,7 +49,7 @@ class BoardRepositoryTest {
 		// given
 		User user = userRepository.findByUidNo(1).get();
 		Board board = Board.builder().uidNo(user.getUidNo())
-				.boardWriter("작성자1")
+				.boardWriter(user.getUserNick())
 				.boardTitle("제목1")
 				.boardContent("내용1")
 				.build();
@@ -94,6 +94,29 @@ class BoardRepositoryTest {
 	}
 	
 	@Test
+	void findByBoardTitle() {
+		// given
+		User user = userRepository.findByUidNo(7).get();
+		Board board = Board.builder().uidNo(user.getUidNo())
+				.boardWriter(user.getUserNick())
+				.boardTitle("제목7")
+				.boardContent("내용7")
+				.build();
+		
+		repository.save(board);
+		
+		// when
+		List<Board> findWriter = repository.findByBoardTitle("제목");
+		
+		// then
+		System.out.println(findWriter.size());
+		assertThat(findWriter).extracting("boardTitle").contains("제목2");
+		assertThat(findWriter).extracting("boardTitle").contains("제목3");
+		assertThat(findWriter).extracting("boardTitle").contains("제목4");
+		assertThat(findWriter).extracting("boardTitle").contains("제목5");
+	}
+	
+	@Test
 	void findByBoardWriter() {
 		// given
 		User user = userRepository.findByUidNo(1).get();
@@ -106,7 +129,7 @@ class BoardRepositoryTest {
 		repository.save(board);
 		
 		// when
-		List<Board> findWriter = repository.findByBoardWriter("작성자");
+		List<Board> findWriter = repository.findByBoardWriter("작");
 		
 		// then
 		System.out.println(findWriter.size());

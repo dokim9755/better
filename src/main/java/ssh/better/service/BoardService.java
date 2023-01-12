@@ -14,7 +14,7 @@ import ssh.better.repository.BoardRepository;
 public class BoardService {
 	private final BoardRepository boardRepository;
 	
-	// 게시글 등록
+	// 게시글 작성
 	public Board save(Integer uidNo, Board board) {
 		board.setUidNo(uidNo);
 		boardRepository.save(board);
@@ -28,9 +28,22 @@ public class BoardService {
 		if(findPk.isEmpty())
 			return null;
 		
-		Board board = findPk.get();
-		
-		return board; 
+		return findPk.get();
+	}
+	
+	// << 조회수 기준 상위 10개 >>
+	public List<Board> findTop() {
+		return boardRepository.findTop();
+	}
+	
+	// 검색_제목 조회
+	public List<Board> findByBoardTitle(String boardTitle) {
+		return boardRepository.findByBoardTitle(boardTitle);
+	}
+	
+	// 검색_작성자
+	public List<Board> findByBoardWriter(String boardWriter) {
+		return boardRepository.findByBoardWriter(boardWriter);
 	}
 	
 	// 전체 조회 : << 기본키 내림차순 >>
@@ -46,21 +59,6 @@ public class BoardService {
 	// 정렬 : << 추천기준 내림차순 >>
 	public List<Board> findByBoardLikeOrder() {
 		return boardRepository.findByBoardLikeOrder();
-	}
-	
-	// 조회수 기준 상위 10개 조회
-	public List<Board> findTop() {
-		return boardRepository.findTop();
-	}
-	
-	// 검색_제목 조회
-	public List<Board> findByBoardTitle(String boardTitle) {
-		return boardRepository.findByBoardTitle(boardTitle);
-	}
-	
-	// 검색_작성자
-	public List<Board> findByBoardWriter(String boardWriter) {
-		return boardRepository.findByBoardWriter(boardWriter);
 	}
 
 	// 게시글 제목 및 내용 수정
