@@ -25,7 +25,7 @@ public class UserRepository {
 	
 	// 유저 아이디 조회
 	public Optional<User> findByUserId(String userId) {
-		String sql = "select u from user u where u.userId like :userId";
+		String sql = "select u from user u where u.userId = :userId";
 		
 		return em.createQuery(sql, User.class).setParameter("userId", userId).getResultStream().findFirst();
 	}
@@ -42,12 +42,6 @@ public class UserRepository {
 		user.setUserPwd(userUp.getUserPwd());
 		user.setUserNick(userUp.getUserNick());
 		
-		User updateUser = em.merge(user);
-		
-		return updateUser;
+		return user;
 	}
-	
-	
-	// 회원탈퇴
-	
 }

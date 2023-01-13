@@ -28,20 +28,31 @@ public class SecurietConfig {
     }
 	
 	@Bean
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return (web) -> web.ignoring().antMatchers("/favicon.ico", "/css/**", "/js/**", "/img/**", "/resources/**");
+	}
+	
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
+	
+	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable()
 					.authorizeRequests()
 					.antMatchers("/", "/login", "/signup", "/posts", "/posts/**/").permitAll()
 					.anyRequest().authenticated()
-				.and()
-					.formLogin()
-					.loginPage("/login")
-					.defaultSuccessUrl("/")
-					//.failureUrl("/error") // 로그인 실패할 경우 url 수정하기
-					.usernameParameter("userId")
-					.passwordParameter("userPwd")
-					.loginProcessingUrl("/login")
-					.permitAll()
+//				.and()
+//					.formLogin()
+//					//.loginPage("/login")
+//					.defaultSuccessUrl("/")
+//					//.failureUrl("/error") // 로그인 실패할 경우 url 수정하기
+//					.usernameParameter("userId")
+//					.passwordParameter("userPwd")
+//					//.loginProcessingUrl("/login")
+//					.permitAll()
 				.and()
 					.logout()
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -49,16 +60,5 @@ public class SecurietConfig {
 					.invalidateHttpSession(true)
 				.and()
 					.build();
-	}
-	
-	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().antMatchers("/favicon.ico", "/error", "/css/**", "/js/**", "/img/**", "/resources/**");
-	}
-	
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-			throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
 	}
 }

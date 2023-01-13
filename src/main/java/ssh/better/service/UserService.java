@@ -12,20 +12,16 @@ import ssh.better.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class UserService {
 	
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
 	public User save(User user) {
-		log.info("유저 정보 >> {}", user);
-		
 		String encoderPwd = passwordEncoder.encode(user.getUserPwd());
 		user.setUserPwd(encoderPwd);
 		
 		userRepository.save(user);
-		log.info("암호화된 유저 정보 저장 확인 >> {}", user);
 		
 		return user;
 	}

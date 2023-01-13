@@ -32,7 +32,7 @@ class UserServiceTest {
 		   User user = User.builder()
 				   			.userId("아이디")
 				   			.userPwd(rawPassword)
-				   			.userNick("test")
+				   			.userNick("test1")
 				   			.userEmail("email@test")
 				   			.build();
 		   log.info("비영속성 유저의 비밀번호 >> {}", user.getUserPwd());
